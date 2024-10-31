@@ -1,0 +1,22 @@
+****Day1 => 
+create project from the scratch =>(Javascript) =>
+ npx create-expo-app@latest linkedinui -t tabs =>Done
+
+upgrade project => Done
+tailwind css => Done
+change icon,adaptive icon, splash screen  (figma)=> Done
+Power cut
+
+
+****Day 2 => 
+now prebuild => wait 8 mins => 
+ - npx expo prebuild
+ -npx expo run:android
+
+
+
+create tabs =>
+add lottie animation=>
+create Drawer =>
+
+
