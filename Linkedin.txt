@@ -9,14 +9,14 @@ Power cut
 
 
 ****Day 2 => 
-now prebuild => wait 8 mins => 
+now prebuild => wait 8 mins => Done
  - npx expo prebuild
  -npx expo run:android
+lets check=>Done
 
 
+create tabs => home,video,my network,notifications,jobs =>Done
 
-create tabs =>
-add lottie animation=>
+
 create Drawer =>
-
-
+add lottie animation=>
