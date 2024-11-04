@@ -13,10 +13,18 @@ now prebuild => wait 8 mins => Done
  - npx expo prebuild
  -npx expo run:android
 lets check=>Done
-
-
 create tabs => home,video,my network,notifications,jobs =>Done
-
-
 create Drawer =>
-add lottie animation=>
+
+
+
+****Day 3 => 
+lets check=>Done
+Design Drawer=>Done
+create Sign in Page=>Done
+
+
+****Day 4 => 
+profile Page
+authentication
+Home page 
