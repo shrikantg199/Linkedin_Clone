@@ -25,6 +25,19 @@ create Sign in Page=>Done
 
 
 ****Day 4 => 
-profile Page
-authentication
+npm install @clerk/clerk-expo=>Done
+npm install expo-secure-store =>Done
+created env => done
+authentication=>Done
+publishableKey & tokenCache=>Done
+redirect=> Done
+password show=>Show
+I have combined email and Google sign-in(Clerk) using ChatGPT.
+signIn=>Done
+bundler issue=>Done
+
+
+
+****Day 5 => 
+design profile Page=> 30%=>Done
 Home page 

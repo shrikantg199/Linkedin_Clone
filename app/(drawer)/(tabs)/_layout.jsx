@@ -1,14 +1,19 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { Stack, Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 import {
   FontAwesome,
   FontAwesome5,
   Ionicons,
   MaterialIcons,
 } from "@expo/vector-icons";
-
+import { useAuth } from "@clerk/clerk-expo";
+// if not signed in redirect to /signin
 const TabLayout = () => {
+  const { isSignedIn } = useAuth();
+  if (!isSignedIn) {
+    return <Redirect href={"/signin"} />;
+  }
   return (
     <Tabs
       screenOptions={{
