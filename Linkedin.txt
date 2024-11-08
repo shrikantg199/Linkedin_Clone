@@ -39,5 +39,40 @@ bundler issue=>Done
 
 
 ****Day 5 => 
-design profile Page=> 30%=>Done
-Home page 
+lets check=>Done
+modify drawer =>Done
+edit icon change =>Done
+
+design profile Page=>
+Name,Skills,Location =>done
+About=>done
+Featured=>done
+Activity=>done
+
+temporary data.json later on I will do firebase integration 
+Home page => posts & reaction =>Done
+
+
+****Day 6 => 
+firebase setup
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

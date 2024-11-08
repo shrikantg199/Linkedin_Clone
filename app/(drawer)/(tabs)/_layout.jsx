@@ -1,15 +1,19 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 import React from "react";
-import { Redirect, Tabs } from "expo-router";
+import { Redirect, Tabs, useNavigation } from "expo-router";
 import {
+  AntDesign,
   FontAwesome,
   FontAwesome5,
   Ionicons,
   MaterialIcons,
 } from "@expo/vector-icons";
 import { useAuth } from "@clerk/clerk-expo";
+import { TouchableOpacity } from "react-native";
+import { DrawerActions } from "@react-navigation/native";
 // if not signed in redirect to /signin
 const TabLayout = () => {
+  const navigation = useNavigation();
   const { isSignedIn } = useAuth();
   if (!isSignedIn) {
     return <Redirect href={"/signin"} />;
@@ -17,7 +21,7 @@ const TabLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
         tabBarActiveTintColor: "black",
         tabBarStyle: {
           height: 60,
@@ -25,6 +29,41 @@ const TabLayout = () => {
         tabBarIconStyle: {
           marginBottom: -10,
         },
+        headerLeft: () => (
+          <TouchableOpacity
+            onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+            className="mx-2"
+          >
+            <Image
+              source={require("../../../assets/profile.png")}
+              className="h-12 w-12"
+            />
+          </TouchableOpacity>
+        ),
+        headerTitle: () => (
+          <View className="bg-blue-400/20 gap-2  px-2 rounded-lg  flex flex-row items-center">
+            {/* search icon */}
+            <FontAwesome name="search" size={20} color="gray" />
+            <TextInput
+              placeholder="search"
+              className=" py-2  w-[260px] text-xl"
+            />
+          </View>
+        ),
+        headerTitleAlign: "center",
+        headerRight: () => (
+          // settings
+
+          <View className="flex flex-row items-center">
+              <AntDesign name="message1" size={24} color="black" />
+            <Ionicons
+              name="settings-outline"
+              size={24}
+              color="black"
+              style={{ marginHorizontal: 6 }}
+            />
+          </View>
+        ),
       }}
     >
       <Tabs.Screen

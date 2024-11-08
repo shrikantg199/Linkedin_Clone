@@ -7,7 +7,7 @@ import {
   Image,
   Alert,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAuth, useSignIn } from "@clerk/clerk-expo";
 import { useRouter } from "expo-router";
@@ -22,6 +22,7 @@ const SignIn = () => {
   const router = useRouter();
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
+
   // Check for existing session on component mount
   useEffect(() => {
     checkExistingSession();
@@ -30,7 +31,6 @@ const SignIn = () => {
   const checkExistingSession = async () => {
     try {
       if (isSignedIn) {
-        // If user is already signed in, redirect to home
         router.push("/");
         return;
       }
@@ -41,17 +41,15 @@ const SignIn = () => {
       }
     } catch (error) {
       console.error("Error checking existing session:", error);
-      // Clear stored data if there's an error
       await SecureStore.deleteItemAsync("sessionToken");
     }
   };
 
   // Enhanced authentication handler with persistence
-  const handleAuthentication = React.useCallback(
+  const handleAuthentication = useCallback(
     async (sessionId) => {
       try {
         await setActive({ session: sessionId });
-        // Store the session token
         await SecureStore.setItemAsync("sessionToken", sessionId);
         router.push("/");
       } catch (error) {
@@ -66,7 +64,7 @@ const SignIn = () => {
   );
 
   // OAuth Google sign-in flow
-  React.useEffect(() => {
+  useEffect(() => {
     WebBrowser.warmUpAsync();
     return () => {
       WebBrowser.coolDownAsync();
@@ -75,7 +73,7 @@ const SignIn = () => {
 
   const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
 
-  const onGoogleSignInPress = React.useCallback(async () => {
+  const onGoogleSignInPress = useCallback(async () => {
     try {
       const { createdSessionId } = await startOAuthFlow({
         redirectUrl: Linking.createURL("/", { scheme: "myapp" }),
@@ -95,8 +93,14 @@ const SignIn = () => {
   }, [handleAuthentication]);
 
   // Email and password sign-in flow
-  const onEmailSignInPress = React.useCallback(async () => {
+  const onEmailSignInPress = useCallback(async () => {
     if (!isLoaded) {
+      Alert.alert("Loading", "Please wait for loading to complete.");
+      return;
+    }
+
+    if (!emailAddress || !password) {
+      Alert.alert("Missing Fields", "Please enter both email and password.");
       return;
     }
 
@@ -113,7 +117,7 @@ const SignIn = () => {
         Alert.alert("Sign-In Error", "Sign-in requires further steps.");
       }
     } catch (err) {
-      console.error("Email sign-in error", err);
+      console.error("Email sign-in error", JSON.stringify(err, null, 2));
       Alert.alert(
         "Sign-In Error",
         err.message || "An error occurred during sign-in."
